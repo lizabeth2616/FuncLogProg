@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LazyFox</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Fox1.fs" />
+    <Compile Include="Fox2.fs" />
+    <Compile Include="Fox3(pars).fs" />
+    <Compile Include="Fox4.fs" />
+    <Compile Include="Fox5.fs" />
+    
+    <Compile Include="Interpreter.fs" />
+    
+    <Compile Include="Program.fs" />
+    
+    <None Include="README.md" />
+    <None Include="sample.x" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FParsec" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>
