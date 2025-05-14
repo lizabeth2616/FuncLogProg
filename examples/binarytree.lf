@@ -1,0 +1,62 @@
+//Определение типа дерева
+type Tree = choice None | (value: int, left: Tree, right: Tree);
+
+// Вставка элемента
+let rec insert tree newVal =
+  match tree with
+  | None -> (newVal, None, None)
+  | (v, L, R) ->
+      {if {< newVal v}
+        then (v, {insert L newVal}, R)
+        else (v, L, {insert R newVal})} $;
+
+// Поиск элемента
+let rec contains tree target =
+  match tree with
+  | None -> false
+  | (v, L, R) ->
+      {if {= target v}
+        then true
+        else {if {< target v}
+          then {contains L target}
+          else {contains R target}}} $;
+
+// Обход в глубину (in-order)
+let rec traverse tree =
+  match tree with
+  | None -> []
+  | (v, L, R) ->
+      {concat 
+        {traverse L}
+        {concat [v] {traverse R}}} $;
+
+//Пример использования
+let main = do
+  // Создание дерева
+  let tree = None;
+  let tree = {insert tree 5};
+  let tree = {insert tree 3};
+  let tree = {insert tree 7};
+  let tree = {insert tree 2};
+  let tree = {insert tree 4};
+
+  // Проверка наличия элементов
+  {std.print "Contains 4: "};
+  {std.print {contains tree 4} %nl};  // true
+  
+  {std.print "Contains 6: "};
+  {std.print {contains tree 6} %nl};  // false
+
+  // Вывод отсортированных значений
+  {std.print "In-order traversal: "};
+  {std.print {traverse tree} %nl};  // [2, 3, 4, 5, 7]
+
+  type GenericTree = choice None | (value: _, left: GenericTree, right: GenericTree);
+
+  let rec genericInsert tree newVal compare =
+    match tree with
+    | None -> (newVal, None, None)
+    | (v, L, R) ->
+        {if {compare newVal v}
+          then (v, {genericInsert L newVal compare}, R)
+          else (v, L, {genericInsert R newVal compare})} $;

@@ -1,0 +1,15 @@
+let rec factorial n =
+  {if {= n 0}
+    then 1
+    else {* n {factorial {- n 1}}}};
+
+let safe_factorial x =
+  {if {std.match_type x int}
+    then {if {>= x 0}
+      then {factorial x}
+      else "Negative number!"}
+    else "Invalid input!"};
+
+{std.print {safe_factorial 5} %nl};    // 120
+{std.print {safe_factorial -2} %nl};   // "Negative number!"
+{std.print {safe_factorial "abc"} %nl}; // "Invalid input!"

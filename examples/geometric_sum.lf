@@ -1,0 +1,18 @@
+let geometric_sum a1 q n =
+  let rec helper current sum count =
+    {if {= count n}
+      then sum
+      else {helper {* current q} {+ sum current} {+ count 1}}} $;
+  {helper a1 0 0};
+
+{std.print "Enter first term (a1): "};
+let a1 = {std.to_int {std.read_line}};
+
+{std.print "Enter ratio (q): "};
+let q = {std.to_int {std.read_line}};
+
+{std.print "Enter number of terms (n): "};
+let n = {std.to_int {std.read_line}};
+
+{std.print "Sum of progression: "};
+{std.print {geometric_sum a1 q n} %nl};

@@ -1,0 +1,3 @@
+{std.print "Enter your name: "};
+let name = {std.read_line};
+{std.print {concat "Hello, " name} %nl};
